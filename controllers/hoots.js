@@ -13,6 +13,16 @@ export const createHoot = async (req, res) => {
   }
 };
 
+// GET "/hoots/:hootId"
+export const getHoot = async (req, res) => {
+  try {
+    const hoot = await Hoot.findById(req.params.hootId).populate("author");
+    res.status(200).json(hoot);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
 // PUT - update - "/hoots/:hootId"
 export const updateHoot = async (req, res) => {
   try {
@@ -40,13 +50,3 @@ export const updateHoot = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
-
-// GET "/hoots/:hootId"
- export const getHoot = async (req, res) => {
-  try {
-    const hoot = await Hoot.findById(req.params.hootId).populate("author");
-    res.status(200).json(hoot);
-  } catch (err) {
-    res.status(500).json({ err: err.message });
-  }
- };

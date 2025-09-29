@@ -10,6 +10,6 @@ router.post("/", verifyToken, hootController.createHoot);
 router.put("/:hootId", verifyToken, hootController.updateHoot);
 router.get("/:hootId", verifyToken, hootController.getHoot);
 // router.delete("/:hootId");
-// router.post("/:hootId", );
+router.post("/:hootId", verifyToken, hootController.postComment);
 
 export default router;

@@ -50,3 +50,23 @@ export const updateHoot = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+
+// POST "/hoots/:hootId/comments"
+export const postComment = async (req, res) => {
+    try {
+    req.body.author = req.user._id;
+    const hoot = await Hoot.findById(req.params.hootId);
+    hoot.comments.push(req.body);
+    await hoot.save();
+
+    // Find the newly created comment:
+    const newComment = hoot.comments[hoot.comments.length - 1];
+
+    newComment._doc.author = req.user;
+
+    // Respond with the newComment:
+    res.status(201).json(newComment);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};

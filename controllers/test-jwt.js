@@ -3,6 +3,7 @@ const router = express.Router();
 const dotenv = require("dotenv");
 dotenv.config();
 const jwt = require('jsonwebtoken');
+const dotenv = require()
 
 router.get('/sign-token', (req, res) => {
   const user = {

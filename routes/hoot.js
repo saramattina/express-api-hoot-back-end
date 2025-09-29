@@ -6,7 +6,7 @@ import { verify } from "crypto";
 const router = Router();
 
 router.post("/", verifyToken, hootController.createHoot);
-// router.get("/", );
+router.get("/", verifyToken, hootController.getHoots);
 router.get("/:hootId", verifyToken, hootController.getHoot);
 router.put("/:hootId", verifyToken, hootController.updateHoot);
 router.delete("/:hootId", verifyToken, hootController.deleteHoot);

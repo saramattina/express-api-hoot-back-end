@@ -1,6 +1,21 @@
 // controllers/hoots.js
-
+import { Router } from "express";
 import Hoot from "../models/hoot.js";
+
+// add routes here
+// controllers/hoots.js
+// controllers/hoots.js
+// GET Index
+export const getHoots = async (req, res) => {
+  try {
+    const hoots = await Hoot.find({})
+      .populate("author")
+      .sort({ createdAt: "desc" });
+    res.status(200).json(hoots);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
 
 export const createHoot = async (req, res) => {
   try {

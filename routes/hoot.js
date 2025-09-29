@@ -7,9 +7,9 @@ const router = Router();
 
 router.post("/", verifyToken, hootController.createHoot);
 router.get("/", verifyToken, hootController.getHoots);
-router.put("/:hootId", verifyToken, hootController.updateHoot);
 router.get("/:hootId", verifyToken, hootController.getHoot);
-// router.delete("/:hootId");
+router.put("/:hootId", verifyToken, hootController.updateHoot);
+router.delete("/:hootId", verifyToken, hootController.deleteHoot);
 // router.post("/:hootId", );
 
 export default router;

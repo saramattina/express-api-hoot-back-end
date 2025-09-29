@@ -1,11 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const dotenv = require("dotenv");
-dotenv.config();
+import { Router } from "express";
+const router = Router();
 
-const User = require("../models/user");
-
-const verifyToken = require("../middleware/verify-token");
+import User from "../models/user.js";
+import { verifyToken } from "../middleware/verify-token.js";
 
 router.get("/", verifyToken, async (req, res) => {
   try {
@@ -35,4 +32,4 @@ router.get("/:userId", verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

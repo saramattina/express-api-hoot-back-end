@@ -1,11 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+import { Router } from "express";
+const router = Router();
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
 dotenv.config();
 
-const User = require("../models/user");
+import User from "../models/user.js";
 
 const saltRounds = 12;
 
@@ -57,4 +58,4 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

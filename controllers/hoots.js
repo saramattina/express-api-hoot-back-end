@@ -3,9 +3,7 @@
 import Hoot from "../models/hoot.js";
 
 // add routes here
-// controllers/hoots.js
 
-// controllers/hoots.js
 
 export const createHoot = async (req, res) => {
   try {
@@ -17,3 +15,14 @@ export const createHoot = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+
+
+// GET "/hoots/:hootId"
+ export const getHoot = async (req, res) => {
+  try {
+    const hoot = await Hoot.findById(req.params.hootId).populate("author");
+    res.status(200).json(hoot);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+ };

@@ -7,8 +7,8 @@ const router = Router();
 
 router.post("/", verifyToken, hootController.createHoot);
 // router.get("/", );
+router.put("/:hootId", verifyToken, hootController.updateHoot);
 router.get("/:hootId", verifyToken, hootController.getHoot);
-// router.put("/:hootId", );
 // router.delete("/:hootId");
 // router.post("/:hootId", );
 

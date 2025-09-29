@@ -1,7 +1,8 @@
 // controllers/hoots.js
-
+import { Router } from "express";
 import Hoot from "../models/hoot.js";
 
+// POST - create - "/hoots"
 export const createHoot = async (req, res) => {
   try {
     req.body.author = req.user._id;
@@ -13,7 +14,19 @@ export const createHoot = async (req, res) => {
   }
 };
 
-// GET "/hoots/:hootId"
+// GET - index - "/hoots"
+export const getHoots = async (req, res) => {
+  try {
+    const hoots = await Hoot.find({})
+      .populate("author")
+      .sort({ createdAt: "desc" });
+    res.status(200).json(hoots);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+// GET - show - "/hoots/:hootId"
 export const getHoot = async (req, res) => {
   try {
     const hoot = await Hoot.findById(req.params.hootId).populate("author");
@@ -51,6 +64,26 @@ export const updateHoot = async (req, res) => {
   }
 };
 
+
+
+
+// DELETE - delete - "/hoots/:hootId"
+export const deleteHoot = async (req, res) => {
+  try {
+    const hoot = await Hoot.findById(req.params.hootId);
+
+    if (!hoot.author.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!");
+    }
+
+    const deletedHoot = await Hoot.findByIdAndDelete(req.params.hootId);
+    res.status(200).json(deletedHoot);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+};
+
+
 // POST "/hoots/:hootId/comments"
 export const postComment = async (req, res) => {
     try {
@@ -70,3 +103,4 @@ export const postComment = async (req, res) => {
     res.status(500).json({ err: err.message });
   }
 };
+

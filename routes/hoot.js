@@ -6,10 +6,12 @@ import { verify } from "crypto";
 const router = Router();
 
 router.post("/", verifyToken, hootController.createHoot);
-// router.get("/", );
-router.put("/:hootId", verifyToken, hootController.updateHoot);
+router.get("/", verifyToken, hootController.getHoots);
 router.get("/:hootId", verifyToken, hootController.getHoot);
-// router.delete("/:hootId");
+
+router.put("/:hootId", verifyToken, hootController.updateHoot);
+router.delete("/:hootId", verifyToken, hootController.deleteHoot);
 router.post("/:hootId", verifyToken, hootController.postComment);
+
 
 export default router;
